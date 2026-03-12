@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Readiness Score</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="header">Entrepreneur Readiness Score</div>
+
+<div class="container">
+
+Confidence (1-5): <input type="number" id="conf"><br>
+Risk (1-5): <input type="number" id="risk"><br>
+Commitment (1-5): <input type="number" id="commit"><br>
+
+<button onclick="calculateScore()">Generate Score</button>
+
+<div class="progress">
+<div class="progress-bar" id="progressBar"></div>
+</div>
+
+<p id="scoreResult"></p>
+
+<button class="back-btn" onclick="goBack('features.html')">Back</button>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

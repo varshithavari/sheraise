@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Entrepreneur Profile - SheRise AI</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body{
+      font-family:'Segoe UI', sans-serif;
+      background: #f3f3f3;
+      margin:0;
+      padding:0;
+    }
+
+    .container{
+      width:80%;
+      max-width:700px;
+      margin:50px auto;
+      padding:30px;
+      background:white;
+      border-radius:15px;
+      box-shadow:0 8px 20px rgba(0,0,0,0.2);
+      color:#333;
+    }
+
+    .header{
+      text-align:center;
+      font-size:32px;
+      margin-bottom:30px;
+      color:#ff4fa3;
+    }
+
+    #userProfile p{
+      font-size:18px;
+      margin:10px 0;
+    }
+
+    .back-btn{
+      padding:12px 25px;
+      border:none;
+      border-radius:10px;
+      background:linear-gradient(90deg,#ff7b54,#6a5af9);
+      color:white;
+      cursor:pointer;
+      font-weight:bold;
+      margin-top:20px;
+      display:block;
+    }
+
+    .back-btn:hover{
+      transform:scale(1.05);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">Entrepreneur Profile</div>
+
+  <div class="container">
+    <!-- Display dynamic profile info here -->
+    <div id="userProfile"></div>
+
+    <button class="back-btn" onclick="goBack()">Back</button>
+  </div>
+
+  <script>
+    // 1️⃣ Get query parameters from URL
+    function getQueryParams() {
+      const params = new URLSearchParams(window.location.search);
+      return {
+        username: params.get('username') || 'User',
+        age: params.get('age') || 'N/A',
+        business: params.get('business') || 'Not selected'
+      };
+    }
+
+    // 2️⃣ Display user profile info dynamically
+    function displayProfile() {
+      const { username, age, business } = getQueryParams();
+      const profileDiv = document.getElementById('userProfile');
+
+      profileDiv.innerHTML = `
+        <p><strong>Username:</strong> ${username}</p>
+        <p><strong>Age:</strong> ${age}</p>
+        <p><strong>Selected Business Category:</strong> ${business}</p>
+      `;
+    }
+
+    // 3️⃣ Back button function
+    function goBack() {
+      history.back(); // returns to the previous page
+    }
+
+    // 4️⃣ Initialize on page load
+    displayProfile();
+  </script>
+
+</body>
+</html>

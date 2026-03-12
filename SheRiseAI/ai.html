@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>SheRise AI Assistant</title>
+
+<style>
+body{
+  margin:0;
+  font-family:Arial, sans-serif;
+  background:linear-gradient(to right,#fbc2eb,#a6c1ee);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+}
+
+.chat-container{
+  width:420px;
+  height:600px;
+  background:white;
+  border-radius:15px;
+  display:flex;
+  flex-direction:column;
+  box-shadow:0 10px 25px rgba(0,0,0,0.3);
+}
+
+.header{
+  background:#6a11cb;
+  color:white;
+  padding:15px;
+  text-align:center;
+  font-weight:bold;
+  border-top-left-radius:15px;
+  border-top-right-radius:15px;
+}
+
+.chat-box{
+  flex:1;
+  padding:15px;
+  overflow-y:auto;
+  display:flex;
+  flex-direction:column;
+}
+
+.message{
+  padding:8px 12px;
+  margin:5px 0;
+  border-radius:10px;
+  max-width:80%;
+  word-wrap:break-word;
+}
+
+.user{
+  align-self:flex-end;
+  background:#d1e7ff;
+}
+
+.bot{
+  align-self:flex-start;
+  background:#e8f5e9;
+}
+
+.input-area{
+  display:flex;
+  border-top:1px solid #ddd;
+}
+
+input{
+  flex:1;
+  padding:10px;
+  border:none;
+  outline:none;
+}
+
+button{
+  padding:10px;
+  border:none;
+  background:#6a11cb;
+  color:white;
+  cursor:pointer;
+}
+</style>
+</head>
+
+<body>
+
+<div class="chat-container">
+
+<div class="header">🤖 SheRise AI Assistant</div>
+
+<div class="chat-box" id="chatBox"></div>
+
+<div class="input-area">
+<input type="text" id="userInput" placeholder="Ask about your business...">
+<button onclick="sendMessage()">Send</button>
+</div>
+
+</div>
+<script>
+
+function sendMessage(){
+
+const inputField = document.getElementById("userInput");
+const message = inputField.value.toLowerCase();
+
+if(!message) return;
+
+const chatBox = document.getElementById("chatBox");
+
+chatBox.innerHTML += `<div class="message user">${message}</div>`;
+
+let reply = "I can help you start a business. Ask about food, fashion, tutoring, or digital marketing!";
+
+if(message.includes("food")){
+reply = "You can start food businesses like home bakery, pickle making, tiffin service, or snack shop.";
+}
+
+else if(message.includes("fashion")){
+reply = "Fashion businesses include boutique, tailoring, jewellery making, or saree reselling.";
+}
+
+else if(message.includes("tutor") || message.includes("teaching")){
+reply = "You can start online tutoring, home tuition, language coaching, or skill training classes.";
+}
+
+else if(message.includes("digital")){
+reply = "Digital businesses include social media management, content creation, affiliate marketing, or freelancing.";
+}
+
+else if(message.includes("low investment")){
+reply = "Low investment businesses include pickle making, home bakery, online tutoring, and handmade crafts.";
+}
+
+else if(message.includes("profit")){
+reply = "Food and digital businesses usually give higher profit with low investment.";
+}
+
+setTimeout(()=>{
+chatBox.innerHTML += `<div class="message bot">${reply}</div>`;
+chatBox.scrollTop = chatBox.scrollHeight;
+},500);
+
+inputField.value = "";
+
+}
+
+</script>
+
+</body>
+</html>

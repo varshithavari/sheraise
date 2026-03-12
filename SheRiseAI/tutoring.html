@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Online Tutoring Ideas - SheRise AI</title>
+<link rel="stylesheet" href="style.css">
+
+<style>
+body{
+  margin:0;
+  font-family:'Segoe UI', sans-serif;   
+  background: linear-gradient(to right,#e3f2fd,#bbdefb);
+}
+
+.header{
+  text-align:center;
+  padding:20px;
+  font-size:32px;
+  font-weight:bold;
+  color:#0d47a1;
+}
+
+.container{
+  width:85%;
+  margin:30px auto;
+  background:white;
+  padding:30px;
+  border-radius:15px;
+  box-shadow:0 8px 20px rgba(0,0,0,0.2);
+}
+
+.idea-card{
+  background:#f1f8ff;
+  padding:20px;
+  margin-bottom:20px;
+  border-radius:12px;
+  transition:0.3s;
+}
+
+.idea-card:hover{
+  transform:translateY(-5px);
+  box-shadow:0 5px 15px rgba(0,0,0,0.2);
+}
+
+.idea-card h3{
+  color:#1565c0;
+}
+
+button{
+  padding:12px 20px;
+  border:none;
+  border-radius:10px;
+  background:linear-gradient(to right,#42a5f5,#1e88e5);
+  color:white;
+  font-weight:bold;
+  cursor:pointer;
+  margin-top:20px;
+}
+
+button:hover{
+  transform:scale(1.05);
+}
+
+.back-btn{
+  background:gray;
+  margin-right:10px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header" id="pageHeader">📚 Online Tutoring Business Ideas</div>
+
+<div class="container" id="ideasContainer">
+  <!-- Idea cards will be dynamically inserted here -->
+</div>
+
+<script>
+// 1️⃣ Get username, age, place from URL
+const params = new URLSearchParams(window.location.search);
+const username = params.get("username") || "User";
+const age = parseInt(params.get("age")) || 25;
+
+// 2️⃣ Update header dynamically
+document.getElementById('pageHeader').innerText = `📚 Online Tutoring Ideas for ${username}`;
+
+// 3️⃣ Define ideas based on age
+const allIdeas = {
+  young: [
+    {title: "School Subject Online Tutor", desc: "Teach Maths, Science, English or Social for Classes 1–12.", investment: "Low investment – Stable monthly income"},
+    {title: "Spoken English Trainer", desc: "Grammar, communication skills and interview preparation.", investment: "High demand in rural & urban areas"},
+    {title: "Coding Instructor for Kids", desc: "Teach Scratch, Python basics and Web design fundamentals.", investment: "Premium earning potential"}
+  ],
+  adult: [
+    {title: "Competitive Exam Coaching", desc: "SSC, Banking, Railway and UPSC basic preparation classes.", investment: "Batch-based income model"},
+    {title: "Activity-Based Tuition for Primary Kids", desc: "Phonics, storytelling, handwriting improvement sessions.", investment: "Easy to start from home"},
+    {title: "Skill-Based Online Courses", desc: "Mehendi, embroidery, cooking or craft workshops.", investment: "Charge per course – High profit"}
+  ],
+  senior: [
+    {title: "Yoga & Fitness Trainer", desc: "Women fitness, prenatal yoga and weight loss programs.", investment: "Subscription model possible"},
+    {title: "Music & Dance Classes", desc: "Classical dance, keyboard, vocal music or western dance.", investment: "Strong consistent demand"},
+    {title: "Career Guidance & Counselling", desc: "Help students with course selection, resume and interviews.", investment: "Premium consultancy model"},
+    {title: "YouTube Educational Channel", desc: "Create educational videos and monetize through ads.", investment: "Long-term passive income opportunity"}
+  ]
+};
+
+// 4️⃣ Filter ideas by age
+let selectedIdeas;
+if(age < 20) selectedIdeas = allIdeas.young;
+else if(age >= 20 && age < 40) selectedIdeas = allIdeas.adult;
+else selectedIdeas = allIdeas.senior;
+
+// 5️⃣ Render ideas dynamically
+const container = document.getElementById('ideasContainer');
+selectedIdeas.forEach((idea, index) => {
+  const card = document.createElement('div');
+  card.className = "idea-card";
+
+  card.innerHTML = `
+    <h3>${index+1}️⃣ ${idea.title}</h3>
+    <p>${idea.desc}</p>
+    <p><strong>Investment:</strong> ${idea.investment}</p>
+    ${idea.income ? `<p><strong>Income:</strong> ${idea.income}</p>` : ''}
+    <button class="ai-btn">Continue to AI Features →</button>
+  `;
+
+  // Add event listener to the AI button
+  // Add event listener to the AI button
+const aiBtn = card.querySelector(".ai-btn");
+
+aiBtn.onclick = () => {
+  window.location.href =
+  `features.html?username=${encodeURIComponent(username)}&age=${age}&business=Tutoring&idea=${encodeURIComponent(idea.title)}`;
+};
+
+  container.appendChild(card);
+});
+// 6️⃣ Back button with history/fallback
+const backBtn = document.createElement('button');
+backBtn.className = 'back-btn';
+backBtn.innerText = "⬅ Back";
+backBtn.onclick = () => {
+  if(document.referrer) history.back();
+  else window.location.href = 'index.html';
+};
+container.appendChild(backBtn);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Fashion Business Ideas - SheRise AI</title>
+<link rel="stylesheet" href="style.css">
+
+<style>
+body{
+  margin:0;
+  font-family:'Segoe UI', sans-serif;
+  background: linear-gradient(to right,#fce4ec,#f8bbd0);
+}
+
+.header{
+  text-align:center;
+  padding:20px;
+  font-size:32px;
+  font-weight:bold;
+  color:#ad1457;
+}
+
+.container{
+  width:85%;
+  margin:30px auto;
+  background:white;
+  padding:30px;
+  border-radius:15px;
+  box-shadow:0 8px 20px rgba(0,0,0,0.2);
+}
+
+.idea-card{
+  background:#fff0f5;
+  padding:20px;
+  margin-bottom:20px;
+  border-radius:12px;
+  transition:0.3s;
+}
+
+.idea-card:hover{
+  transform:translateY(-5px);
+  box-shadow:0 5px 15px rgba(0,0,0,0.2);
+}
+
+.idea-card h3{
+  color:#c2185b;
+}
+
+button{
+  padding:12px 20px;
+  border:none;
+  border-radius:10px;
+  background:linear-gradient(to right,#ec407a,#d81b60);
+  color:white;
+  font-weight:bold;
+  cursor:pointer;
+  margin-top:20px;
+}
+
+button:hover{
+  transform:scale(1.05);
+}
+
+.back-btn{
+  background:gray;
+  margin-right:10px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">👗 Fashion Business Ideas</div>
+
+<div class="container" id="ideasContainer">
+  <!-- Idea cards will be dynamically inserted here -->
+</div>
+
+<script>
+// 1️⃣ Read username and age from URL
+const params = new URLSearchParams(window.location.search);
+const username = params.get("username") || "User";
+const age = parseInt(params.get("age")) || 25;
+
+// 2️⃣ Update header with username
+document.querySelector('.header').innerText = `👗 Fashion Business Ideas for ${username}`;
+
+// 3️⃣ Define ideas based on age
+const allIdeas = {
+  young: [
+    {title: "Home-Based Boutique", desc: "Custom stitching, designer blouses, ethnic & party wear.", investment: "₹20,000 – ₹50,000"},
+    {title: "Kids Wear Business", desc: "Handmade frocks, party dresses, custom embroidery designs.", investment: "Growing demand among parents"},
+    {title: "Fashion Accessories Business", desc: "Hair accessories, handbags, scarves, belts and trendy add-ons.", investment: "Low investment – Good online sales"}
+  ],
+  adult: [
+    {title: "Saree Reselling Business", desc: "Sell wholesale sarees via WhatsApp & Instagram without keeping stock.", investment: "₹5,000 – ₹15,000"},
+    {title: "Handmade Jewellery", desc: "Terracotta jewellery, silk thread bangles, beaded sets.", investment: "Low investment – High festive demand"},
+    {title: "Online Clothing Brand", desc: "Start your own fashion label and sell kurtis, western wear or printed t-shirts.", investment: "High branding opportunity"},
+    {title: "Tailoring & Alteration Services", desc: "Daily wear stitching, school uniforms, fall & pico services.", investment: "Stable local income"}
+  ],
+  senior: [
+    {title: "Sustainable Fashion & Upcycling", desc: "Convert old sarees into gowns, redesign denim, eco-friendly fashion.", investment: "Modern & trending concept"},
+    {title: "Embroidery & Handwork Business", desc: "Aari work, mirror work, blouse embroidery and custom designs.", investment: "Skill-based high income"},
+    {title: "Fashion Influencer / Styling Consultant", desc: "Provide styling advice, Instagram reels, brand collaborations.", investment: "Low cost – Unlimited income potential"}
+  ]
+};
+
+// 4️⃣ Select ideas based on age
+let selectedIdeas;
+if(age < 20) selectedIdeas = allIdeas.young;
+else if(age >= 20 && age < 40) selectedIdeas = allIdeas.adult;
+else selectedIdeas = allIdeas.senior;
+
+// 5️⃣ Display ideas
+const container = document.getElementById('ideasContainer');
+selectedIdeas.forEach((idea, index) => {
+  const card = document.createElement('div');
+  card.className = "idea-card";
+
+  card.innerHTML = `
+    <h3>${index+1}️⃣ ${idea.title}</h3>
+    <p>${idea.desc}</p>
+    <p><strong>Investment:</strong> ${idea.investment}</p>
+    ${idea.income ? `<p><strong>Income:</strong> ${idea.income}</p>` : ''}
+    <button class="ai-btn">Continue to AI Features →</button>
+  `;
+
+  // Add event listener to the AI button
+  const aiBtn = card.querySelector(".ai-btn");
+  aiBtn.onclick = () => {
+window.location.href =
+`features.html?username=${encodeURIComponent(username)}&age=${age}&business=Fashion&idea=${encodeURIComponent(idea.title)}`;
+};
+  container.appendChild(card);
+});
+
+// 6️⃣ Add Back and Continue buttons
+const backBtn = document.createElement('button');
+backBtn.className = 'back-btn';
+backBtn.innerText = "⬅ Back";
+backBtn.onclick = () => {
+  if (document.referrer) {
+    // Go back to the previous page
+    history.back();
+  } else {
+    // Fallback to index.html if no previous page
+    window.location.href = 'index.html';
+  }
+};
+container.appendChild(backBtn);
+</script>
+
+</body>
+</html>

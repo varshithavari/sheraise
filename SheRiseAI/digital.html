@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Digital Marketing Ideas - SheRise AI</title>
+<link rel="stylesheet" href="style.css">
+
+<style>
+body{
+  margin:0;
+  font-family:'Segoe UI', sans-serif;
+  background: linear-gradient(to right,#e3f2fd,#bbdefb);
+}
+
+.header{
+  text-align:center;
+  padding:20px;
+  font-size:32px;
+  font-weight:bold;
+  color:#0d47a1;
+}
+
+.container{
+  width:85%;
+  margin:30px auto;
+  background:white;
+  padding:30px;
+  border-radius:15px;
+  box-shadow:0 8px 20px rgba(0,0,0,0.2);
+}
+
+.idea-card{
+  background:#f1f8ff;
+  padding:20px;
+  margin-bottom:20px;
+  border-radius:12px;
+  transition:0.3s;
+}
+
+.idea-card:hover{
+  transform:translateY(-5px);
+  box-shadow:0 5px 15px rgba(0,0,0,0.2);
+}
+
+.idea-card h3{
+  color:#1565c0;
+}
+
+button{
+  padding:12px 20px;
+  border:none;
+  border-radius:10px;
+  background:linear-gradient(to right,#2196f3,#0d47a1);
+  color:white;
+  font-weight:bold;
+  cursor:pointer;
+  margin-top:20px;
+}
+
+button:hover{
+  transform:scale(1.05);
+}
+
+.back-btn{
+  background:gray;
+  margin-right:10px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header" id="pageHeader">💻 Digital Marketing Business Ideas</div>
+
+<div class="container" id="ideasContainer">
+  <!-- Ideas will be dynamically inserted here -->
+</div>
+
+<script>
+// 1️⃣ Get username, age, place from URL
+const params = new URLSearchParams(window.location.search);
+const username = params.get("username") || "User";
+const age = parseInt(params.get("age")) || 25;
+
+// 2️⃣ Update header dynamically
+document.getElementById('pageHeader').innerText = `💻 Digital Marketing Ideas for ${username}`;
+
+// 3️⃣ Define ideas based on age
+const allIdeas = {
+  young: [
+    {title: "Social Media Manager", desc: "Manage Instagram and Facebook pages for small businesses. Create posts, reels, reply to messages and grow followers.", investment: "Mobile + Internet", income: "₹8,000 – ₹25,000 per client/month"},
+    {title: "Content Creator / Influencer", desc: "Create reels and videos about cooking, fashion, beauty or motivation. Earn from brand promotions.", investment: "Smartphone", income: "Depends on followers & brand deals"},
+    {title: "Freelance Graphic Designer", desc: "Design posters, logos, thumbnails and social media posts using Canva or Photoshop.", investment: "Laptop + Design software", income: "₹500 – ₹5,000 per design"}
+  ],
+  adult: [
+    {title: "Digital Marketing Consultant", desc: "Help local shops grow online by running ads and creating marketing strategies.", investment: "Marketing skills", income: "₹15,000+ per client"},
+    {title: "YouTube Channel", desc: "Start a cooking, education, DIY, or beauty channel and earn from ads and sponsorships.", investment: "Smartphone + Internet", income: "Passive income via YouTube ads"},
+    {title: "Affiliate Marketing", desc: "Promote Amazon or Flipkart products and earn commission for each sale through your link.", investment: "No product required", income: "Commission-based earnings"}
+  ],
+  senior: [
+    {title: "Blogging", desc: "Start a blog about parenting, recipes, fashion or motivation and earn through ads & sponsorship.", investment: "Domain + Hosting", income: "Long-term passive income"},
+    {title: "Online Course Creator", desc: "Teach tailoring, cooking, makeup or spoken English through recorded courses.", investment: "Skill + Recording device", income: "One-time creation, repeated sales"},
+    {title: "Email Marketing Services", desc: "Create promotional emails and newsletters for businesses to increase customer engagement.", investment: "Email marketing tools knowledge", income: "₹10,000+ per project"},
+    {title: "SEO Specialist", desc: "Help websites rank on Google using keyword research and website optimization techniques.", investment: "SEO skills", income: "₹20,000+ per client"}
+  ]
+};
+
+// 4️⃣ Filter ideas by age
+let selectedIdeas;
+if(age < 20) selectedIdeas = allIdeas.young;
+else if(age >= 20 && age < 40) selectedIdeas = allIdeas.adult;
+else selectedIdeas = allIdeas.senior;
+
+// 5️⃣ Render ideas dynamically
+const container = document.getElementById('ideasContainer');
+selectedIdeas.forEach((idea, index) => {
+  const card = document.createElement('div');
+  card.className = "idea-card";
+
+  card.innerHTML = `
+    <h3>${index+1}️⃣ ${idea.title}</h3>
+    <p>${idea.desc}</p>
+    <p><strong>Investment:</strong> ${idea.investment}</p>
+    ${idea.income ? `<p><strong>Income:</strong> ${idea.income}</p>` : ''}
+    <button class="ai-btn">Continue to AI Features →</button>
+  `;
+
+  // ✅ Corrected: Pass business="Digital" to match scheme.html
+  const aiBtn = card.querySelector(".ai-btn");
+  aiBtn.onclick = () => {
+    window.location.href =
+    `features.html?username=${encodeURIComponent(username)}&age=${age}&business=Digital&idea=${encodeURIComponent(idea.title)}`;
+  };
+
+  container.appendChild(card);
+});
+
+// 6️⃣ Back button with history/fallback
+const backBtn = document.createElement('button');
+backBtn.className = 'back-btn';
+backBtn.innerText = "⬅ Back";
+backBtn.onclick = () => {
+  if(document.referrer) history.back();
+  else window.location.href = 'index.html';
+};
+container.appendChild(backBtn);
+</script>
+
+</body>
+</html>

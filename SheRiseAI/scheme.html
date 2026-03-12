@@ -1,0 +1,376 @@
+go through with previous chat where i disucussed about my portal.<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Government Schemes - SheRise AI</title>
+
+<style>
+
+body{
+margin:0;
+font-family:'Segoe UI',sans-serif;
+background:linear-gradient(135deg,#f3e5f5,#e1f5fe);
+}
+
+.header{
+text-align:center;
+padding:30px;
+font-size:36px;
+font-weight:bold;
+color:#d81b60;
+}
+
+.container{
+width:85%;
+margin:auto;
+background:white;
+padding:30px;
+border-radius:15px;
+box-shadow:0 8px 25px rgba(0,0,0,0.2);
+}
+
+.scheme-card{
+background:#f5f5f5;
+padding:20px;
+border-radius:12px;
+margin-bottom:20px;
+box-shadow:0 5px 15px rgba(0,0,0,0.15);
+}
+
+.scheme-card h3{
+color:#6a1b9a;
+}
+
+.scheme-card p{
+margin:8px 0;
+}
+
+.apply-btn{
+margin-top:10px;
+padding:10px 20px;
+border:none;
+border-radius:8px;
+background:linear-gradient(90deg,#ff7043,#7e57c2);
+color:white;
+font-weight:bold;
+cursor:pointer;
+}
+
+.apply-btn:hover{
+transform:scale(1.05);
+}
+
+.back-btn{
+margin-top:30px;
+padding:12px 25px;
+border:none;
+border-radius:10px;
+background:gray;
+color:white;
+font-weight:bold;
+cursor:pointer;
+}
+
+.back-btn:hover{
+transform:scale(1.05);
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="header">Government Schemes for Your Business</div>
+
+<div class="container" id="schemeContainer"></div>
+
+<div style="text-align:center">
+<button class="back-btn" onclick="history.back()">⬅ Back</button>
+</div>
+
+<script>
+
+const params = new URLSearchParams(window.location.search);
+const sector = params.get("business");
+const idea = params.get("idea");
+
+const schemes = [
+
+/* ---------------- FOOD BUSINESS SCHEMES ---------------- */
+
+{
+sector:"Food",
+name:"PMFME Scheme",
+desc:"Supports micro food processing businesses such as pickles, snacks, bakery, and cloud kitchens.",
+benefits:"35% subsidy up to ₹10 lakh. Branding, marketing, and skill training support.",
+bestFor:["Homemade Pickles & Papad","Millet & Healthy Snacks","Cloud Kitchen"],
+link:"https://pmfme.mofpi.gov.in"
+},
+
+{
+sector:"Food",
+name:"PMEGP",
+desc:"Financial assistance for micro enterprises including food businesses.",
+benefits:"Loan up to ₹50 lakh with subsidy up to 35%.",
+bestFor:["Home Baking Business","Tiffin / Meal Subscription","Cloud Kitchen"],
+link:"https://www.kviconline.gov.in/pmegp"
+},
+
+{
+sector:"Food",
+name:"Mudra Loan",
+desc:"Collateral-free loans for micro businesses.",
+benefits:"Loans up to ₹10 lakh.",
+bestFor:[
+"Homemade Pickles & Papad",
+"Home Baking Business",
+"Tiffin / Meal Subscription",
+"Millet & Healthy Snacks",
+"Cooking Classes Online",
+"Recipe eBook"
+],
+link:"https://www.mudra.org.in"
+},
+
+{
+sector:"Food",
+name:"Stand Up India",
+desc:"Loans for women entrepreneurs starting manufacturing or service businesses.",
+benefits:"₹10 lakh to ₹1 crore loans.",
+bestFor:["Cloud Kitchen","Millet & Healthy Snacks"],
+link:"https://www.standupmitra.in"
+},
+
+{
+sector:"Food",
+name:"National Millet Mission",
+desc:"Promotes millet-based food products.",
+benefits:"Training, financial support, and marketing help.",
+bestFor:["Millet & Healthy Snacks"],
+link:"https://millets.res.in"
+},
+
+/* ---------------- FASHION BUSINESS SCHEMES ---------------- */
+
+{
+sector:"Fashion",
+name:"SAMARTH Scheme",
+desc:"Skill development program for textile and fashion workers.",
+benefits:"Training support and employment assistance.",
+bestFor:["Boutique","Fashion Designing","Handmade Clothing"],
+link:"https://samarth-textiles.gov.in"
+},
+
+{
+sector:"Fashion",
+name:"Silk Samagra",
+desc:"Government support scheme for silk industry.",
+benefits:"Financial and technical support for silk production.",
+bestFor:["Handmade Clothing","Fashion Designing"],
+link:"https://silksamagra.gov.in"
+},
+
+{
+sector:"Fashion",
+name:"National Handloom Development Programme",
+desc:"Supports handloom weavers and designers.",
+benefits:"Financial support, infrastructure, marketing.",
+bestFor:["Handloom Boutique","Ethnic Fashion"],
+link:"https://handlooms.nic.in"
+},
+
+{
+sector:"Fashion",
+name:"PM MITRA Parks Scheme",
+desc:"Mega textile parks scheme supporting textile manufacturing.",
+benefits:"Infrastructure support and investment opportunities.",
+bestFor:[" Brand","Clothing Manufacturing"],
+link:"https://texmin.nic.in"
+},
+
+{
+sector:"Fashion",
+name:"Mudra Loan",
+desc:"Small business loan for fashion startups.",
+benefits:"Loans up to ₹10 lakh without collateral.",
+bestFor:["Boutique","Online Clothing Store","Fashion Accessories"],
+link:"https://www.mudra.org.in"
+},
+
+/* ---------------- DIGITAL MARKETING SCHEMES ---------------- */
+
+{
+sector:"Digital",
+name:"Digital India Program",
+desc:"Promotes digital entrepreneurship and IT services.",
+benefits:"Training, startup ecosystem support.",
+bestFor:["Digital Marketing Agency","Social Media Consulting"],
+link:"https://digitalindia.gov.in"
+},
+
+{
+sector:"Digital",
+name:"Startup India",
+desc:"Support for innovative startups in technology sectors.",
+benefits:"Tax exemption, funding opportunities.",
+bestFor:["Digital Marketing Agency","SEO Business","Content Creation"],
+link:"https://www.startupindia.gov.in"
+},
+
+{
+sector:"Digital",
+name:"Skill India",
+desc:"Skill training for digital jobs and entrepreneurship.",
+benefits:"Government-funded training programs.",
+bestFor:["Freelance Marketing","Content Creation"],
+link:"https://www.skillindia.gov.in"
+},
+
+{
+sector:"Digital",
+name:"Mudra Loan",
+desc:"Loan scheme for digital entrepreneurs.",
+benefits:"Up to ₹10 lakh loan.",
+bestFor:["Digital Marketing Agency","Freelancing"],
+link:"https://www.mudra.org.in"
+},
+{
+sector:"Digital",
+name:"MSME Digital Scheme",
+desc:"Supports MSMEs to digitize their operations including marketing.",
+benefits:"Financial aid for digital tools, e-commerce platforms, and online promotions.",
+bestFor:["Digital Marketing Agency","Social Media Marketing","E-commerce Services"],
+link:"https://msme.gov.in"
+},
+
+{
+sector:"Digital",
+name:"AIM iHub Scheme",
+desc:"Incubation support for tech startups including digital marketing solutions.",
+benefits:"Mentorship, funding, and infrastructure support.",
+bestFor:["Digital Marketing Startups","AI-Powered Marketing Tools"],
+link:"https://aim.gov.in"
+},
+
+{
+sector:"Digital",
+name:"TIDE 2.0",
+desc:"Technology Incubation and Development of Entrepreneurs for IT/ITES startups.",
+benefits:"Financial support, incubation, mentoring for digital services.",
+bestFor:["SEO Services","Content Marketing","Social Media Startups"],
+link:"https://meity.gov.in"
+},
+
+{
+sector:"Digital",
+name:"Digital MSME",
+desc:"Helps micro and small enterprises improve digital presence.",
+benefits:"Training, grants, and digital marketing assistance.",
+bestFor:["Social Media Marketing","Digital Promotions","Online Ads Management"],
+link:"https://msme.gov.in/digital-msme"
+},
+
+/* ---------------- TUTORING SCHEMES ---------------- */
+
+{
+sector:"Tutoring",
+name:"PM eVidya",
+desc:"Government initiative promoting digital education platforms.",
+benefits:"Support for online education systems.",
+bestFor:["Online Tutoring","Educational Platforms"],
+link:"https://pmevidya.education.gov.in"
+},
+
+{
+sector:"Tutoring",
+name:"Skill India",
+desc:"Encourages training institutes and education businesses.",
+benefits:"Government training support and recognition.",
+bestFor:["Coaching Institutes","Skill Training Centers"],
+link:"https://www.skillindia.gov.in"
+},
+
+{
+sector:"Tutoring",
+name:"Startup India",
+desc:"Support for EdTech startups.",
+benefits:"Funding support and tax exemptions.",
+bestFor:["Online Tutoring Platforms","EdTech Apps"],
+link:"https://www.startupindia.gov.in"
+},
+
+{
+sector:"Tutoring",
+name:"Mudra Loan",
+desc:"Loan support for coaching and education startups.",
+benefits:"Collateral-free loan up to ₹10 lakh.",
+bestFor:["Home Tuition","Online Tutoring"],
+link:"https://www.mudra.org.in"
+},
+/* ---------------- ADDITIONAL DIGITAL MARKETING SCHEMES ---------------- */
+
+{
+sector:"Digital",
+name:"Pradhan Mantri Gramin Digital Saksharta Abhiyan (PMGDISHA)",
+desc:"Aims to make 6 crore rural households digitally literate.",
+benefits:"Training in digital tools, online safety, and e-services.",
+bestFor:["Freelance Digital Marketing","Social Media Management","Small Business Digital Presence"],
+link:"https://www.pmgdisha.in"
+},
+
+{
+sector:"Digital",
+name:"Digital Literacy & e-Learning Support",
+desc:"Promotes e-learning platforms and digital skill development.",
+benefits:"Access to digital training courses, workshops, and government-recognized certifications.",
+bestFor:["Digital Marketing Training","Content Creation Courses","Social Media Consultancy"],
+link:"https://www.skillindia.gov.in"
+},
+
+{
+sector:"Digital",
+name:"National Programme on Technology Enhanced Learning (NPTEL)",
+desc:"Provides online courses for technology and management, including digital marketing.",
+benefits:"Free and certified online courses to upskill.",
+bestFor:["SEO Training","Digital Marketing Skills","Freelancing Services"],
+link:"https://onlinecourses.nptel.ac.in"
+},
+
+{
+sector:"Digital",
+name:"SIDBI Make in India Soft Loan Scheme for Micro & Small Enterprises (SMILE) – Digital Focus",
+desc:"Financial support for tech-driven startups including digital marketing solutions.",
+benefits:"Soft loans, mentoring, and funding for digital initiatives.",
+bestFor:["Digital Marketing Startups","Social Media Agencies","Content Creators"],
+link:"https://www.sidbi.in"
+}
+
+];
+
+const container = document.getElementById("schemeContainer");
+
+schemes.forEach(scheme=>{
+
+if(!sector || scheme.sector === sector){
+const card = document.createElement("div");
+card.className="scheme-card";
+
+card.innerHTML=`
+<h3>${scheme.name}</h3>
+<p><b>Description:</b> ${scheme.desc}</p>
+<p><b>Benefits:</b> ${scheme.benefits}</p>
+<button class="apply-btn" onclick="window.open('${scheme.link}','_blank')">
+Apply on Official Portal
+</button>
+`;
+
+container.appendChild(card);
+
+}
+
+});
+
+</script>
+
+</body>
+</html>    

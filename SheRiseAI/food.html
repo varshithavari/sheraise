@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Food Business Ideas - SheRise AI</title>
+<link rel="stylesheet" href="style.css">
+
+<style>
+body{
+  margin:0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(to right,#fff3e0,#ffe0b2);
+}
+
+.header{
+  text-align:center;
+  padding:20px;
+  font-size:32px;
+  font-weight:bold;
+  color:#e65100;
+}
+
+.container{
+  width:85%;
+  margin:30px auto;
+  background:white;
+  padding:30px;
+  border-radius:15px;
+  box-shadow:0 8px 20px rgba(0,0,0,0.2);
+}
+
+.idea-card{
+  background:#fff8f0;
+  padding:20px;
+  margin-bottom:20px;
+  border-radius:12px;
+  transition:0.3s;
+}
+
+.idea-card:hover{
+  transform:translateY(-5px);
+  box-shadow:0 5px 15px rgba(0,0,0,0.2);
+}
+
+.idea-card h3{
+  color:#d84315;
+}
+
+button{
+  padding:12px 20px;
+  border:none;
+  border-radius:10px;
+  background:linear-gradient(to right,#ff7043,#ff5722);
+  color:white;
+  font-weight:bold;
+  cursor:pointer;
+  margin-top:20px;
+}
+
+button:hover{
+  transform:scale(1.05);
+}
+
+.back-btn{
+  background:gray;
+  margin-right:10px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">🍲 Food Business Ideas</div>
+
+<div class="container" id="ideasContainer">
+</div>
+
+<script>
+
+// 1️⃣ Read username and age from URL
+const params = new URLSearchParams(window.location.search);
+const username = params.get("username") || "User";
+const age = parseInt(params.get("age")) || 25;
+
+// 2️⃣ Update header with username
+document.querySelector('.header').innerText = `🍲 Food Business Ideas for ${username}`;
+
+// 3️⃣ Define ideas based on age
+const allIdeas = {
+
+  young: [
+    {title: "Homemade Pickles & Papad", desc: "Low investment business. Sell through local stores or WhatsApp groups.", investment: "₹3,000 – ₹8,000"},
+    {title: "Home Baking Business", desc: "Custom cakes, cupcakes, brownies for birthdays and events.", investment: "₹10,000 – ₹15,000"}
+  ],
+
+  adult: [
+    {title: "Tiffin / Meal Subscription", desc: "Provide daily homemade meals for students and office workers.", investment: "₹10,000 – ₹20,000"},
+    {title: "Millet & Healthy Snacks", desc: "Ragi cookies, protein laddoos, sugar-free sweets.", investment: "High demand in urban areas"},
+    {title: "Cloud Kitchen", desc: "Start online food delivery via Swiggy/Zomato without restaurant space.", investment: "High growth potential"}
+  ],
+
+  senior: [
+    {title: "Cooking Classes Online", desc: "Teach cooking online to local community or via YouTube.", investment: "Low investment, high reach"},
+    {title: "Recipe eBook", desc: "Write and sell digital recipe books online.", investment: "Very low investment"}
+  ]
+};
+
+// 4️⃣ Select ideas based on age
+let selectedIdeas;
+
+if(age < 20)
+selectedIdeas = allIdeas.young;
+
+else if(age >= 20 && age < 40)
+selectedIdeas = allIdeas.adult;
+
+else
+selectedIdeas = allIdeas.senior;
+
+
+// 5️⃣ Display ideas
+const container = document.getElementById('ideasContainer');
+
+selectedIdeas.forEach((idea, index) => {
+
+  const card = document.createElement('div');
+  card.className = "idea-card";
+
+  card.innerHTML = `
+    <h3>${index+1}️⃣ ${idea.title}</h3>
+    <p>${idea.desc}</p>
+    <p><strong>Investment:</strong> ${idea.investment}</p>
+    <button class="ai-btn">Continue to AI Features →</button>
+  `;
+
+  const aiBtn = card.querySelector(".ai-btn");
+
+  // ✅ UPDATED LINE
+  aiBtn.onclick = () => {
+window.location.href =
+`features.html?username=${encodeURIComponent(username)}&age=${age}&business=Food&idea=${encodeURIComponent(idea.title)}`;
+};
+  container.appendChild(card);
+});
+
+
+// 6️⃣ Back button
+const backBtn = document.createElement('button');
+backBtn.className = 'back-btn';
+backBtn.innerText = "⬅ Back";
+
+backBtn.onclick = () => {
+
+  if (document.referrer) {
+    history.back();
+  }
+
+  else {
+    window.location.href = 'index.html';
+  }
+
+};
+
+container.appendChild(backBtn);
+
+</script>
+<!-- Chatbot Button -->
+<div id="chatbotButton" onclick="toggleChat()">💬</div>
+
+<!-- Chatbot Window -->
+<div id="chatbotBox">
+
+<div id="chatHeader">
+SheRise Assistant
+<span onclick="toggleChat()" style="cursor:pointer;">✖</span>
+</div>
+
+<div id="chatMessages"></div>
+
+<div id="chatInputArea">
+<input id="chatInput" placeholder="Ask your doubt...">
+<button onclick="sendMessage()">Send</button>
+</div>
+
+</div>
+
+<style>
+
+#chatbotButton{
+position:fixed;
+bottom:20px;
+right:20px;
+background:#6a11cb;
+color:white;
+font-size:24px;
+width:60px;
+height:60px;
+display:flex;
+align-items:center;
+justify-content:center;
+border-radius:50%;
+cursor:pointer;
+box-shadow:0 5px 15px rgba(0,0,0,0.3);
+}
+
+#chatbotBox{
+position:fixed;
+bottom:90px;
+right:20px;
+width:320px;
+height:420px;
+background:white;
+border-radius:10px;
+box-shadow:0 5px 20px rgba(0,0,0,0.3);
+display:none;
+flex-direction:column;
+}
+
+#chatHeader{
+background:#6a11cb;
+color:white;
+padding:10px;
+display:flex;
+justify-content:space-between;
+font-weight:bold;
+}
+
+#chatMessages{
+flex:1;
+padding:10px;
+overflow-y:auto;
+font-size:14px;
+}
+
+#chatInputArea{
+display:flex;
+border-top:1px solid #ddd;
+}
+
+#chatInputArea input{
+flex:1;
+border:none;
+padding:10px;
+outline:none;
+}
+
+#chatInputArea button{
+background:#6a11cb;
+color:white;
+border:none;
+padding:10px 15px;
+cursor:pointer;
+}
+
+</style>
+<script>
+
+/* CONVERSATION MEMORY */
+
+let lastTopic = "";
+
+
+/* FOOD KNOWLEDGE DATABASE */
+
+const foodAI = [
+
+{
+topic:"start",
+keywords:["start","begin","launch","open"],
+answers:[
+"To start a food business, first choose a product like homemade snacks, bakery items, or pickles. Test your recipe, calculate cost, then promote it through social media and local customers.",
+"Starting a food business requires good recipes, proper hygiene, and effective marketing. Many successful entrepreneurs begin from home kitchens."
+]
+},
+
+{
+topic:"pickle",
+keywords:["pickle","papad","achar"],
+answers:[
+"Homemade pickles and papad are excellent low-investment food businesses. You can start with ₹3000–₹8000 and sell through local stores or WhatsApp groups.",
+"Traditional homemade pickles like mango, lemon, and garlic are always in demand. Good packaging and hygiene help build customer trust."
+]
+},
+
+{
+topic:"baking",
+keywords:["cake","bakery","baking","cupcake","cookies"],
+answers:[
+"A home baking business can include cakes, cupcakes, brownies, and cookies for birthdays and events.",
+"Custom cakes are highly profitable. Many bakers grow their business through Instagram marketing and online orders."
+]
+},
+
+{
+topic:"tiffin",
+keywords:["tiffin","meal","lunch","dinner"],
+answers:[
+"Tiffin services provide homemade meals for students and office workers. This business often works with monthly subscriptions.",
+"A successful tiffin service focuses on healthy food, consistent taste, and reliable delivery."
+]
+},
+
+{
+topic:"healthy",
+keywords:["millet","healthy","snacks","diet"],
+answers:[
+"Healthy snack businesses using millets like ragi and jowar are trending because people prefer nutritious foods.",
+"You can make millet cookies, protein laddoos, baked snacks, and sugar-free sweets."
+]
+},
+
+{
+topic:"cloud",
+keywords:["cloud kitchen","online restaurant","delivery kitchen"],
+answers:[
+"A cloud kitchen is an online restaurant that sells food through delivery apps like Swiggy or Zomato without a physical dining area.",
+"This model reduces rent cost and allows entrepreneurs to run multiple food brands from one kitchen."
+]
+},
+
+{
+topic:"investment",
+keywords:["investment","cost","budget"],
+answers:[
+"Most home food businesses require an investment between ₹5,000 and ₹20,000 depending on ingredients, packaging, and equipment.",
+"Low-investment food businesses include pickles, snacks, baking, and small catering services."
+]
+},
+
+{
+topic:"profit",
+keywords:["profit","income","earn","money"],
+answers:[
+"Food businesses can generate consistent profit because food is a daily necessity.",
+"Businesses like bakery products, snack production, and meal subscriptions often generate steady income."
+]
+},
+
+{
+topic:"marketing",
+keywords:["marketing","promotion","advertise","sell"],
+answers:[
+"You can promote your food business using Instagram reels, WhatsApp Business, Google Maps listing, and local communities.",
+"Attractive packaging, good photos, and customer reviews can significantly increase food sales."
+]
+},
+
+{
+topic:"license",
+keywords:["license","fssai","legal"],
+answers:[
+"In India, most food businesses require FSSAI registration to legally sell food products.",
+"This certification ensures food safety and increases customer trust."
+]
+}
+
+];
+
+
+/* FIND BEST MATCH */
+
+function generateFoodResponse(message){
+
+message = message.toLowerCase();
+
+let bestMatch = null;
+let bestScore = 0;
+
+foodAI.forEach(item=>{
+
+let score=0;
+
+item.keywords.forEach(word=>{
+if(message.includes(word)) score++;
+});
+
+if(score>bestScore){
+bestScore=score;
+bestMatch=item;
+}
+
+});
+
+
+if(bestMatch){
+
+lastTopic = bestMatch.topic;
+
+const replies = bestMatch.answers;
+return replies[Math.floor(Math.random()*replies.length)];
+
+}
+
+
+/* FOLLOW-UP MEMORY RESPONSE */
+
+if(lastTopic==="pickle"){
+return "If you want to grow your pickle business, you can introduce new flavors and sell them through online marketplaces and local grocery stores.";
+}
+
+if(lastTopic==="baking"){
+return "Expanding your baking menu with pastries, brownies, and celebration cakes can increase your bakery sales.";
+}
+
+
+/* INTELLIGENT DEFAULT ANSWERS */
+
+const smartReplies=[
+
+"Food businesses succeed when you focus on quality, hygiene, and customer satisfaction.",
+
+"You can start small with homemade food products and expand gradually as your customer base grows.",
+
+"Understanding customer preferences and offering unique recipes can make your food business stand out.",
+
+"Marketing through social media and good packaging can significantly increase your food sales."
+
+];
+
+return smartReplies[Math.floor(Math.random()*smartReplies.length)];
+
+}
+
+
+
+/* CHAT UI FUNCTIONS */
+
+function toggleChat(){
+const box=document.getElementById("chatbotBox");
+box.style.display=(box.style.display==="flex")?"none":"flex";
+}
+
+
+
+function sendMessage(){
+
+const input=document.getElementById("chatInput");
+const message=input.value;
+
+if(!message) return;
+
+const chat=document.getElementById("chatMessages");
+
+chat.innerHTML+=`<p><b>You:</b> ${message}</p>`;
+
+chat.innerHTML+=`<p id="typing"><i>SheRise AI is typing...</i></p>`;
+
+chat.scrollTop=chat.scrollHeight;
+
+const reply=generateFoodResponse(message);
+
+
+/* TYPING ANIMATION */
+
+setTimeout(()=>{
+
+document.getElementById("typing").remove();
+
+chat.innerHTML+=`<p><b>SheRise AI:</b> ${reply}</p>`;
+
+chat.scrollTop=chat.scrollHeight;
+
+},800);
+
+input.value="";
+
+}
+
+</script>
+</body>
+</html>

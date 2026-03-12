@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Select Business</title>
+<link rel="stylesheet" href="style.css">
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+body{
+  height:100vh;
+  background:
+    linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+    url("business-bg.jpg");
+  background-size:cover;
+  background-position:center;
+  color:white;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+
+.header{
+  font-size:36px;
+  margin:30px 0;
+  color:#ff4fa3;
+}
+
+.container{
+  width:90%;
+  max-width:1000px;
+  text-align:center;
+}
+
+.button-grid{
+  display:grid;
+  grid-template-columns:repeat(2, 1fr);
+  gap:25px;
+}
+
+.button-grid button{
+  border:none;
+  border-radius:20px;
+  overflow:hidden;
+  cursor:pointer;
+  position:relative;
+  height:220px;
+  color:white;
+  font-size:20px;
+  font-weight:bold;
+  background-size:cover;
+  background-position:center;
+  transition:0.4s;
+}
+
+.button-grid button::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.5);
+}
+
+.button-grid button span{
+  position:relative;
+  z-index:2;
+}
+
+.button-grid button:hover{
+  transform:scale(1.05);
+  box-shadow:0 10px 30px rgba(0,0,0,0.6);
+}
+
+.food{ background-image:url("food.jpg"); }
+.fashion{ background-image:url("fashion.jpg"); }
+.tutoring{ background-image:url("tutoring.jpg"); }
+.digital{ background-image:url("digital1.jpg"); }
+
+.back-btn{
+  margin-top:30px;
+  padding:12px 25px;
+  border:none;
+  border-radius:10px;
+  background:linear-gradient(90deg,#ff7b54,#6a5af9);
+  color:white;
+  cursor:pointer;
+  font-weight:bold;
+  transition:0.3s;
+}
+
+.back-btn:hover{
+  transform:scale(1.05);
+}
+
+@media(max-width:768px){
+  .button-grid{
+    grid-template-columns:1fr;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">Select Your Business Category</div>
+
+<div class="container">
+
+<div class="button-grid">
+<button class="food" id="foodBtn"><span>Food Business</span></button>
+<button class="fashion" id="fashionBtn"><span>Fashion Business</span></button>
+<button class="tutoring" id="tutoringBtn"><span>Online Tutoring</span></button>
+<button class="digital" id="digitalBtn"><span>Digital Marketing</span></button>
+</div>
+
+<button class="back-btn" onclick="window.location.href='index.html'">Back</button>
+
+</div>
+
+<script>
+// ✅ Read user info from URL
+const params = new URLSearchParams(window.location.search);
+const username = params.get("username") || "User";
+const age = params.get("age") || "25";
+
+// ✅ Redirect buttons to **respective idea pages**, not profile.html
+document.getElementById('foodBtn').onclick = () => {
+  window.location.href = `food.html?username=${encodeURIComponent(username)}&age=${encodeURIComponent(age)}&business=Food`;
+};
+document.getElementById('fashionBtn').onclick = () => {
+  window.location.href = `fashion.html?username=${encodeURIComponent(username)}&age=${encodeURIComponent(age)}&business=Fashion`;
+};
+document.getElementById('tutoringBtn').onclick = () => {
+  window.location.href = `tutoring.html?username=${encodeURIComponent(username)}&age=${encodeURIComponent(age)}&business=Online Tutoring`;
+};
+document.getElementById('digitalBtn').onclick = () => {
+  window.location.href = `digital.html?username=${encodeURIComponent(username)}&age=${encodeURIComponent(age)}&business=Digital Marketing`;
+};
+</script>
+</body>
+</html>

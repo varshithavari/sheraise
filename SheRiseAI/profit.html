@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Profit Simulator - SheRise AI</title>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+
+body{
+margin:0;
+font-family:'Segoe UI',sans-serif;
+background:linear-gradient(135deg,#f3e5f5,#e1f5fe);
+}
+
+.header{
+text-align:center;
+padding:25px;
+font-size:34px;
+font-weight:bold;
+color:#d81b60;
+}
+
+.container{
+width:80%;
+max-width:900px;
+margin:auto;
+background:white;
+padding:30px;
+border-radius:15px;
+box-shadow:0 8px 25px rgba(0,0,0,0.2);
+}
+
+.input-group{
+margin:15px 0;
+}
+
+label{
+font-weight:bold;
+}
+
+input{
+width:100%;
+padding:10px;
+margin-top:5px;
+border-radius:8px;
+border:1px solid #ccc;
+}
+
+button{
+margin-top:15px;
+padding:12px 25px;
+border:none;
+border-radius:10px;
+background:linear-gradient(90deg,#ff7043,#7e57c2);
+color:white;
+font-weight:bold;
+cursor:pointer;
+}
+
+button:hover{
+transform:scale(1.05);
+}
+
+.result{
+margin-top:20px;
+background:#f5f5f5;
+padding:20px;
+border-radius:10px;
+}
+
+.back-btn{
+margin-top:20px;
+background:gray;
+}
+
+canvas{
+margin-top:25px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="header">Profit & Break-even Simulator</div>
+
+<div class="container">
+
+<div class="input-group">
+<label>Initial Investment (₹)</label>
+<input type="number" id="investment" placeholder="Example: 10000">
+</div>
+
+<div class="input-group">
+<label>Monthly Revenue (₹)</label>
+<input type="number" id="revenue" placeholder="Example: 25000">
+</div>
+
+<div class="input-group">
+<label>Monthly Expenses (₹)</label>
+<input type="number" id="expenses" placeholder="Example: 10000">
+</div>
+
+<button onclick="calculateProfit()">Calculate Profit</button>
+
+<div class="result" id="resultBox"></div>
+
+<canvas id="profitChart"></canvas>
+
+<button class="back-btn" onclick="history.back()">⬅ Back</button>
+
+</div>
+
+<script>
+
+let chart;
+
+// Calculate Profit
+function calculateProfit(){
+
+const investment = parseFloat(document.getElementById("investment").value);
+const revenue = parseFloat(document.getElementById("revenue").value);
+const expenses = parseFloat(document.getElementById("expenses").value);
+
+if(!investment || !revenue || !expenses){
+alert("Please fill all fields");
+return;
+}
+
+const monthlyProfit = revenue - expenses;
+const breakEvenMonths = Math.ceil(investment / monthlyProfit);
+const yearlyProfit = monthlyProfit * 12;
+
+document.getElementById("resultBox").innerHTML = `
+<b>Monthly Profit:</b> ₹${monthlyProfit}<br><br>
+<b>Yearly Profit:</b> ₹${yearlyProfit}<br><br>
+<b>Break-even Time:</b> ${breakEvenMonths} months
+`;
+
+// Chart Data
+const data = [
+investment,
+monthlyProfit,
+yearlyProfit
+];
+
+const labels = [
+"Initial Investment",
+"Monthly Profit",
+"Yearly Profit"
+];
+
+if(chart){
+chart.destroy();
+}
+
+const ctx = document.getElementById("profitChart");
+
+chart = new Chart(ctx,{
+type:'bar',
+data:{
+labels:labels,
+datasets:[{
+label:'Business Profit Analysis',
+data:data
+}]
+},
+options:{
+responsive:true
+}
+});
+
+}
+
+</script>
+
+</body>
+</html>

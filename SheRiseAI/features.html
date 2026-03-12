@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Business Modules - SheRise AI</title>
+<link rel="stylesheet" href="style.css">
+<style>
+body{
+  font-family:'Segoe UI', sans-serif;
+  background:#f3f7f4;
+  margin:0;
+}
+
+.header{
+  text-align:center;
+  font-size:32px;
+  margin:20px 0;
+  color:#ff4fa3;
+}
+
+.container{
+  width:90%;
+  max-width:1000px;
+  margin:20px auto;
+  text-align:center;
+}
+
+.button-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:20px;
+  margin-bottom:30px;
+}
+
+.button-grid button{
+  padding:15px;
+  border:none;
+  border-radius:12px;
+  font-size:18px;
+  font-weight:bold;
+  cursor:pointer;
+  background:linear-gradient(90deg,#ff7b54,#6a5af9);
+  color:white;
+  transition:0.3s;
+}
+
+.button-grid button:hover{
+  transform:scale(1.05);
+}
+
+.back-btn{
+  padding:12px 25px;
+  border:none;
+  border-radius:10px;
+  background:gray;
+  color:white;
+  font-weight:bold;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.back-btn:hover{
+  transform:scale(1.05);
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">Business Modules</div>
+
+<div class="container">
+  <div class="button-grid">
+    <button id="profileBtn">Entrepreneur Profile</button>
+    <button id="ideaBtn">AI Idea Generator</button>
+    <button onclick="goPage('scheme.html')">Scheme Matcher</button>
+    <button onclick="goPage('profit.html')">Profit Simulator</button>
+    <button onclick="goPage('score.html')">Readiness Score</button>
+  </div>
+
+  <button class="back-btn" onclick="goBack()">Back</button>
+</div>
+
+<script>
+
+// 1️⃣ Read URL parameters (INCLUDING IDEA)
+function getQueryParams() {
+  const params = new URLSearchParams(window.location.search);
+  return {
+    username: params.get('username') || '',
+    age: params.get('age') || '',
+    business: params.get('business') || '',
+    idea: params.get('idea') || ''   // ⭐ IMPORTANT
+  };
+}
+
+// 2️⃣ Redirect with all parameters
+function goPage(page) {
+  const { username, age, business, idea } = getQueryParams();
+
+  window.location.href =
+  `${page}?username=${encodeURIComponent(username)}&age=${encodeURIComponent(age)}&business=${encodeURIComponent(business)}&idea=${encodeURIComponent(idea)}`;
+}
+
+// 3️⃣ Profile Button
+document.getElementById('profileBtn').addEventListener('click', () => {
+  goPage('profile.html');
+});
+
+// 4️⃣ AI Idea Generator Button
+document.getElementById('ideaBtn').addEventListener('click', () => {
+  goPage('idea.html');
+});
+
+// 5️⃣ Back Button
+function goBack(){
+  history.back();
+}
+
+</script>
+
+</body>
+</html>

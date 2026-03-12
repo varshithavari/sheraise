@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>AI Business Roadmap</title>
+
+<style>
+
+body{
+margin:0;
+font-family:'Segoe UI',sans-serif;
+background:linear-gradient(135deg,#f3e5f5,#e1f5fe);
+}
+
+.header{
+text-align:center;
+padding:30px;
+font-size:36px;
+font-weight:bold;
+color:#d81b60;
+}
+
+.container{
+width:85%;
+margin:auto;
+background:white;
+padding:30px;
+border-radius:15px;
+box-shadow:0 8px 25px rgba(0,0,0,0.2);
+}
+
+.idea-title{
+font-size:28px;
+color:#6a1b9a;
+margin-bottom:10px;
+}
+
+.info-box{
+background:#f5f5f5;
+padding:15px;
+border-radius:10px;
+margin-bottom:20px;
+}
+
+.roadmap{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:20px;
+margin-top:20px;
+}
+
+.step{
+background:#fff3e0;
+padding:20px;
+border-radius:12px;
+box-shadow:0 5px 15px rgba(0,0,0,0.15);
+transition:0.3s;
+}
+
+.step:hover{
+transform:translateY(-5px);
+}
+
+.step h3{
+color:#e65100;
+margin-bottom:10px;
+}
+
+.marketing{
+margin-top:30px;
+background:#e8f5e9;
+padding:20px;
+border-radius:12px;
+}
+
+.back-btn{
+margin-top:30px;
+padding:12px 25px;
+border:none;
+border-radius:10px;
+background:linear-gradient(90deg,#ff7043,#7e57c2);
+color:white;
+font-weight:bold;
+cursor:pointer;
+}
+
+.back-btn:hover{
+transform:scale(1.05);
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="header">AI Business Roadmap</div>
+
+<div class="container">
+
+<div id="ideaTitle" class="idea-title"></div>
+
+<div class="info-box">
+<p><b>Startup Investment:</b> <span id="investment"></span></p>
+<p><b>Profit Potential:</b> <span id="profit"></span></p>
+</div>
+
+<h2>Step-by-Step Business Plan</h2>
+
+<div id="roadmapSteps" class="roadmap"></div>
+
+<div id="marketing" class="marketing"></div>
+
+<button class="back-btn" onclick="history.back()">⬅ Back</button>
+
+</div>
+
+
+<script>
+
+// read selected idea
+const params = new URLSearchParams(window.location.search);
+const idea = params.get("idea");
+
+document.getElementById("ideaTitle").innerText = idea;
+
+
+// roadmap data
+const businessData = {
+
+"Homemade Pickles & Papad":{
+
+investment:"₹3,000 – ₹8,000",
+profit:"₹20,000+ per month",
+
+steps:[
+"Learn traditional pickle and papad recipes.",
+"Buy raw materials like mango, spices, oil, and flour.",
+"Prepare pickles hygienically at home.",
+"Dry papads in sunlight for proper texture.",
+"Package products in airtight packets.",
+"Sell to neighbours and local grocery stores.",
+"Promote products through WhatsApp groups.",
+"Create Instagram page for orders.",
+"Take bulk orders during festivals.",
+"Expand by selling online or in supermarkets."
+],
+
+marketing:"Use WhatsApp groups, local kirana stores, Instagram food pages, and festival stalls to attract customers."
+
+},
+
+"Home Baking Business":{
+
+investment:"₹10,000 – ₹15,000",
+profit:"₹30,000+ per month",
+
+steps:[
+"Learn baking techniques online or from courses.",
+"Buy oven, baking trays, and basic tools.",
+"Practice cakes, brownies, cupcakes.",
+"Create a small menu list.",
+"Start selling to friends and family.",
+"Post cake photos on Instagram.",
+"Take birthday and event orders.",
+"Deliver locally.",
+"Partner with cafes.",
+"Expand to custom theme cakes."
+],
+
+marketing:"Use Instagram reels, food bloggers, and birthday party collaborations to grow your business."
+
+},
+
+"Tiffin / Meal Subscription":{
+
+investment:"₹10,000 – ₹20,000",
+profit:"₹40,000+ per month",
+
+steps:[
+"Plan weekly meal menu.",
+"Identify customers like students or office workers.",
+"Buy lunch boxes and packaging materials.",
+"Start cooking small quantity meals.",
+"Deliver food to nearby customers.",
+"Create monthly subscription plans.",
+"Promote service in hostels and offices.",
+"Hire helpers when demand grows.",
+"Add breakfast and dinner options.",
+"Expand to a cloud kitchen."
+],
+
+marketing:"Promote through hostel groups, office areas, and food delivery apps."
+
+},
+
+"Millet & Healthy Snacks":{
+
+investment:"₹8,000 – ₹12,000",
+profit:"₹35,000+ per month",
+
+steps:[
+"Research healthy millet recipes.",
+"Source ragi, jowar, and bajra grains.",
+"Prepare laddoos, cookies, and snacks.",
+"Design healthy brand packaging.",
+"Sell to gyms and organic stores.",
+"Promote on Instagram.",
+"Offer diet snack combo packs.",
+"Sell through Amazon or Flipkart.",
+"Collaborate with dieticians.",
+"Launch your own health snack brand."
+],
+
+marketing:"Target gyms, dieticians, and health-conscious customers through social media."
+
+},
+
+"Cloud Kitchen":{
+
+investment:"₹20,000 – ₹50,000",
+profit:"₹60,000+ per month",
+
+steps:[
+"Choose a food niche like biryani or fast food.",
+"Create a simple menu.",
+"Register on Swiggy and Zomato.",
+"Buy kitchen equipment.",
+"Cook food from home kitchen.",
+"Focus on packaging quality.",
+"Offer combo meal deals.",
+"Collect customer reviews.",
+"Add more menu items.",
+"Expand to multiple cloud kitchens."
+],
+
+marketing:"Use food delivery apps, Instagram food ads, and local promotions."
+
+},
+
+"Cooking Classes Online":{
+
+investment:"₹5,000 – ₹10,000",
+profit:"₹25,000+ per month",
+
+steps:[
+"Choose your cooking expertise like traditional food or baking.",
+"Prepare a structured cooking course.",
+"Set up smartphone camera and tripod in kitchen.",
+"Record cooking tutorials with clear steps.",
+"Create online classes through Zoom or Google Meet.",
+"Upload videos on YouTube or Instagram.",
+"Charge fees for premium classes.",
+"Offer downloadable recipe PDFs.",
+"Collaborate with food influencers.",
+"Expand into a full online cooking academy."
+],
+
+marketing:"Promote through YouTube cooking videos, Instagram reels, and online cooking workshops."
+
+},
+
+"Recipe eBook":{
+
+investment:"₹2,000 – ₹5,000",
+profit:"₹20,000+ per month",
+
+steps:[
+"Collect your best homemade recipes.",
+"Organize them into categories like breakfast, lunch, snacks.",
+"Write step-by-step cooking instructions.",
+"Take good photos of dishes.",
+"Design the eBook using Canva.",
+"Convert the file into PDF format.",
+"Sell through Amazon Kindle or Gumroad.",
+"Promote recipes on Instagram food pages.",
+"Create cooking blog or YouTube channel.",
+"Release more eBooks like 'Healthy Recipes' or 'Quick Snacks'."
+],
+
+marketing:"Promote through food blogs, Instagram recipe reels, and YouTube cooking tutorials."
+
+},
+"Home-Based Boutique":{
+
+investment:"₹20,000 – ₹50,000",
+
+profit:"₹40,000+ per month",
+
+steps:[
+"Learn stitching and fashion design basics.",
+"Buy sewing machine, threads, fabrics, and tools.",
+"Start designing blouses, kurtis, and ethnic wear.",
+"Create sample pieces for display.",
+"Show designs to neighbours and friends.",
+"Take custom stitching orders.",
+"Promote boutique through WhatsApp and Instagram.",
+"Offer festival and wedding collections.",
+"Partner with local fabric shops.",
+"Expand into a small fashion boutique brand."
+],
+
+marketing:"Promote through Instagram reels, bridal groups, and local fashion exhibitions."
+
+},
+
+"Kids Wear Business":{
+
+investment:"₹10,000 – ₹25,000",
+
+profit:"₹30,000+ per month",
+
+steps:[
+"Research trending kids fashion designs.",
+"Buy soft fabrics suitable for children.",
+"Design frocks, party dresses, and kids wear.",
+"Create colourful and attractive designs.",
+"Start selling to neighbours and relatives.",
+"Promote products in parenting groups.",
+"Create Instagram page for your brand.",
+"Take birthday and festival orders.",
+"Collaborate with kids boutiques.",
+"Launch online kids fashion store."
+],
+
+marketing:"Promote through parenting communities, Instagram reels, and kids birthday events."
+
+},
+
+"Fashion Accessories Business":{
+
+investment:"₹5,000 – ₹12,000",
+
+profit:"₹25,000+ per month",
+
+steps:[
+"Research trending fashion accessories.",
+"Buy materials like beads, ribbons, and fabrics.",
+"Create hair clips, handbags, scarves, and belts.",
+"Design unique handmade accessories.",
+"Sell products in local markets.",
+"Open Instagram store.",
+"Offer combo accessory sets.",
+"Promote through reels and fashion pages.",
+"Partner with clothing boutiques.",
+"Expand into a fashion accessories brand."
+],
+
+marketing:"Use Instagram reels, fashion influencers, and online marketplaces."
+
+},
+
+"Saree Reselling Business":{
+
+investment:"₹5,000 – ₹15,000",
+
+profit:"₹35,000+ per month",
+
+steps:[
+"Find reliable saree wholesalers.",
+"Select trending saree collections.",
+"Create WhatsApp and Instagram business accounts.",
+"Post saree photos and price details.",
+"Start taking customer orders.",
+"Place orders with wholesalers after confirmation.",
+"Deliver sarees to customers.",
+"Offer festival discounts.",
+"Build regular customer base.",
+"Expand to online boutique store."
+],
+
+marketing:"Promote through WhatsApp groups, Instagram live sales, and festival offers."
+
+},
+
+"Handmade Jewellery":{
+
+investment:"₹5,000 – ₹10,000",
+
+profit:"₹25,000+ per month",
+
+steps:[
+"Research handmade jewellery trends.",
+"Buy beads, stones, wires, and tools.",
+"Learn jewellery making through tutorials.",
+"Create necklaces, earrings, and bangles.",
+"Design attractive packaging.",
+"Sell to friends and local customers.",
+"Promote products on Instagram.",
+"Take wedding and event orders.",
+"Collaborate with boutiques.",
+"Launch online jewellery brand."
+],
+
+marketing:"Promote through Instagram reels, fashion influencers, and festive markets."
+
+},
+
+"Online Clothing Brand":{
+
+investment:"₹20,000 – ₹40,000",
+
+profit:"₹60,000+ per month",
+
+steps:[
+"Choose a fashion niche like ethnic wear or western wear.",
+"Source clothes from wholesalers or manufacturers.",
+"Create brand name and logo.",
+"Open Instagram and WhatsApp business page.",
+"Upload clothing product photos.",
+"Start taking online orders.",
+"Provide delivery service.",
+"Run social media ads.",
+"Collaborate with influencers.",
+"Launch your own fashion website."
+],
+
+marketing:"Use Instagram ads, influencer collaborations, and fashion reels."
+
+},
+
+"Tailoring & Alteration Services":{
+
+investment:"₹8,000 – ₹15,000",
+
+profit:"₹30,000+ per month",
+
+steps:[
+"Buy sewing machine and tailoring tools.",
+"Learn stitching and alteration skills.",
+"Start offering simple stitching services.",
+"Promote services in neighbourhood.",
+"Take blouse and dress stitching orders.",
+"Offer fall & pico services for sarees.",
+"Provide school uniform stitching.",
+"Hire assistants if demand grows.",
+"Expand services to boutique stitching.",
+"Open tailoring shop."
+],
+
+marketing:"Promote through local areas, WhatsApp groups, and tailoring boards."
+
+},
+
+"Sustainable Fashion & Upcycling":{
+
+investment:"₹5,000 – ₹12,000",
+
+profit:"₹30,000+ per month",
+
+steps:[
+"Collect old clothes, sarees, and fabrics.",
+"Learn upcycling fashion techniques.",
+"Create jackets, bags, and modern outfits.",
+"Design eco-friendly fashion products.",
+"Promote sustainable fashion concept.",
+"Sell through Instagram.",
+"Participate in flea markets.",
+"Collaborate with eco-fashion stores.",
+"Launch eco-fashion brand.",
+"Expand to sustainable fashion collections."
+],
+
+marketing:"Target eco-conscious customers through social media."
+
+},
+
+"Embroidery & Handwork Business":{
+
+investment:"₹6,000 – ₹15,000",
+
+profit:"₹35,000+ per month",
+
+steps:[
+"Learn embroidery techniques like aari work.",
+"Buy embroidery frames and threads.",
+"Practice blouse embroidery designs.",
+"Create design samples.",
+"Promote services locally.",
+"Take custom embroidery orders.",
+"Collaborate with boutiques.",
+"Offer bridal embroidery services.",
+"Create Instagram portfolio.",
+"Start embroidery design studio."
+],
+
+marketing:"Promote through bridal boutiques and Instagram fashion pages."
+
+},
+
+"Fashion Influencer / Styling Consultant":{
+
+investment:"₹3,000 – ₹8,000",
+
+profit:"₹50,000+ per month",
+
+steps:[
+"Create Instagram or YouTube fashion page.",
+"Share daily fashion tips and styling videos.",
+"Post outfit ideas and fashion reels.",
+"Build audience and followers.",
+"Collaborate with fashion brands.",
+"Promote clothing and accessories.",
+"Offer personal styling consultation.",
+"Create fashion workshops.",
+"Launch online styling courses.",
+"Become professional fashion influencer."
+],
+
+marketing:"Grow audience through Instagram reels, YouTube shorts, and brand collaborations."
+
+},
+"School Subject Online Tutor":{
+
+investment:"₹2,000 – ₹5,000",
+profit:"₹20,000 – ₹50,000 per month",
+
+steps:[
+"Choose subjects you are strong in like Maths, Science or English.",
+"Prepare simple teaching notes and worksheets.",
+"Create a quiet teaching space with laptop or mobile.",
+"Use Zoom or Google Meet for online classes.",
+"Start with small batches of 5–10 students.",
+"Promote tuition classes in school parent WhatsApp groups.",
+"Offer demo class for students.",
+"Charge monthly tuition fee per student.",
+"Create recorded lessons for revision.",
+"Expand by adding more subjects and teachers."
+],
+
+marketing:"Promote through school groups, parent communities, Facebook groups and local WhatsApp networks."
+
+},
+
+"Spoken English Trainer":{
+
+investment:"₹3,000 – ₹7,000",
+profit:"₹25,000+ per month",
+
+steps:[
+"Create a Spoken English training syllabus.",
+"Prepare lessons for grammar, vocabulary and communication.",
+"Record short speaking practice videos.",
+"Conduct live practice sessions through Zoom.",
+"Give students daily speaking tasks.",
+"Provide interview preparation tips.",
+"Charge course fees for 1-month programs.",
+"Create beginner, intermediate and advanced courses.",
+"Promote success stories of students.",
+"Expand by launching your own English learning academy."
+],
+
+marketing:"Promote through Instagram reels, YouTube speaking tips, and job preparation communities."
+
+},
+
+"Coding Instructor for Kids":{
+
+investment:"₹5,000 – ₹10,000",
+profit:"₹40,000+ per month",
+
+steps:[
+"Learn kid-friendly coding platforms like Scratch.",
+"Prepare beginner coding lessons for children.",
+"Design fun projects like games and animations.",
+"Use screen sharing tools for teaching.",
+"Create weekly coding assignments.",
+"Offer coding competitions for kids.",
+"Charge monthly course fee.",
+"Promote in school groups and parenting communities.",
+"Create YouTube coding tutorials for kids.",
+"Expand into a coding academy."
+],
+
+marketing:"Target parents through Facebook parenting groups, school communities and coding competitions."
+
+},
+
+"Competitive Exam Coaching":{
+
+investment:"₹10,000 – ₹20,000",
+profit:"₹50,000+ per month",
+
+steps:[
+"Choose exam category like SSC, Banking or UPSC basics.",
+"Prepare study materials and practice questions.",
+"Create daily online classes.",
+"Conduct mock tests weekly.",
+"Provide doubt clearing sessions.",
+"Create study plans for students.",
+"Charge batch-based coaching fees.",
+"Promote classes through Telegram study groups.",
+"Upload free preparation tips on YouTube.",
+"Expand into a full coaching institute."
+],
+
+marketing:"Promote through exam preparation Telegram groups, YouTube channels and student communities."
+
+},
+
+"Activity-Based Tuition for Primary Kids":{
+
+investment:"₹3,000 – ₹6,000",
+profit:"₹20,000+ per month",
+
+steps:[
+"Create fun learning activities for kids.",
+"Teach phonics, reading and writing.",
+"Use storytelling and games for learning.",
+"Conduct small batch classes.",
+"Provide worksheets and activity books.",
+"Share student progress with parents.",
+"Charge monthly tuition fees.",
+"Promote in apartment communities.",
+"Conduct summer camps for kids.",
+"Expand into a learning center."
+],
+
+marketing:"Promote through parenting groups, local schools and community centers."
+
+},
+
+"Skill-Based Online Courses":{
+
+investment:"₹5,000 – ₹10,000",
+profit:"₹30,000+ per month",
+
+steps:[
+"Choose skill like Mehendi, cooking or embroidery.",
+"Design course modules for beginners.",
+"Record step-by-step tutorials.",
+"Conduct live workshops.",
+"Sell course access online.",
+"Provide downloadable learning materials.",
+"Promote workshops on Instagram.",
+"Offer certification after course completion.",
+"Collaborate with influencers.",
+"Expand with multiple skill courses."
+],
+
+marketing:"Promote through Instagram reels, YouTube tutorials and workshop advertisements."
+
+},
+
+"Yoga & Fitness Trainer":{
+
+investment:"₹5,000 – ₹12,000",
+profit:"₹40,000+ per month",
+
+steps:[
+"Complete basic yoga training certification.",
+"Create daily workout schedules.",
+"Start online fitness sessions.",
+"Offer women-only fitness programs.",
+"Create diet and health plans.",
+"Charge monthly membership fees.",
+"Promote transformation stories.",
+"Upload workout videos on Instagram.",
+"Launch special weight loss programs.",
+"Expand into a fitness brand."
+],
+
+marketing:"Promote through Instagram fitness reels, health communities and YouTube workouts."
+
+},
+
+"Music & Dance Classes":{
+
+investment:"₹5,000 – ₹15,000",
+profit:"₹35,000+ per month",
+
+steps:[
+"Choose music or dance style to teach.",
+"Prepare beginner lesson plans.",
+"Conduct online classes through Zoom.",
+"Record practice sessions.",
+"Organize student performances online.",
+"Charge monthly training fees.",
+"Promote through YouTube demo videos.",
+"Offer certification programs.",
+"Conduct holiday workshops.",
+"Expand into an academy."
+],
+
+marketing:"Promote through Instagram dance reels, YouTube performances and cultural event groups."
+
+},
+
+"Career Guidance & Counselling":{
+
+investment:"₹5,000 – ₹10,000",
+profit:"₹50,000+ per month",
+
+steps:[
+"Research career options in different fields.",
+"Prepare career guidance presentations.",
+"Offer one-to-one counselling sessions.",
+"Create resume building workshops.",
+"Guide students on higher education choices.",
+"Charge consultation fees.",
+"Promote through LinkedIn and student forums.",
+"Conduct career webinars.",
+"Collaborate with colleges.",
+"Expand into career consultancy firm."
+],
+
+marketing:"Promote through LinkedIn, career webinars and student counselling programs."
+
+},
+
+"YouTube Educational Channel":{
+
+investment:"₹3,000 – ₹8,000",
+profit:"₹50,000+ per month (after growth)",
+
+steps:[
+"Choose education topic like school subjects or skills.",
+"Create lesson videos regularly.",
+"Use simple recording setup with phone.",
+"Upload videos consistently.",
+"Optimize titles and thumbnails.",
+"Promote channel on social media.",
+"Enable YouTube monetization.",
+"Collaborate with other educators.",
+"Sell online courses.",
+"Build a full educational brand."
+],
+
+marketing:"Promote through YouTube SEO, Instagram education pages and student communities."
+
+},
+"Social Media Manager":{
+
+investment:"Smartphone + Internet",
+profit:"₹25,000 – ₹60,000 per month",
+
+steps:[
+"Learn basics of Instagram, Facebook, and LinkedIn marketing.",
+"Practice designing posts using Canva.",
+"Understand hashtags, reels, and audience engagement.",
+"Create sample social media pages as portfolio.",
+"Approach local businesses like boutiques and restaurants.",
+"Offer social media management packages.",
+"Create weekly content calendars.",
+"Post reels, stories, and promotions regularly.",
+"Analyze engagement using Instagram insights.",
+"Scale by managing multiple client accounts."
+],
+
+marketing:"Promote your services through LinkedIn, Instagram portfolio, freelancer platforms like Fiverr and Upwork."
+
+},
+
+"Content Creator / Influencer":{
+
+investment:"Smartphone + Internet",
+profit:"₹20,000 – ₹1,00,000 per month",
+
+steps:[
+"Choose a niche like cooking, fashion, fitness or motivation.",
+"Create Instagram or YouTube account.",
+"Plan weekly content ideas.",
+"Record high-quality reels and short videos.",
+"Post consistently with trending hashtags.",
+"Engage with followers through comments and polls.",
+"Collaborate with other creators.",
+"Reach 10K+ followers to attract brand deals.",
+"Promote products through sponsored posts.",
+"Build your personal brand and expand to YouTube."
+],
+
+marketing:"Use trending reels, collaborations, and hashtags to grow audience and attract brands."
+
+},
+
+"Freelance Graphic Designer":{
+
+investment:"Laptop + Canva/Photoshop",
+profit:"₹30,000+ per month",
+
+steps:[
+"Learn design tools like Canva, Photoshop or Illustrator.",
+"Practice creating posters, thumbnails and logos.",
+"Build a portfolio of your best designs.",
+"Create Instagram page for your design work.",
+"Register on freelance platforms like Fiverr and Upwork.",
+"Offer affordable packages for small businesses.",
+"Design social media posts for clients.",
+"Collect testimonials from satisfied clients.",
+"Increase pricing as your portfolio grows.",
+"Build your own design agency."
+],
+
+marketing:"Promote designs on Instagram, Behance and freelancing platforms."
+
+},
+
+"Digital Marketing Consultant":{
+
+investment:"Marketing skills",
+profit:"₹40,000+ per month",
+
+steps:[
+"Learn digital marketing fundamentals like SEO, ads and analytics.",
+"Complete certification courses from Google or HubSpot.",
+"Create a portfolio of marketing case studies.",
+"Offer consultation to small businesses.",
+"Run Facebook and Instagram ad campaigns.",
+"Track campaign performance and ROI.",
+"Create monthly marketing reports.",
+"Charge consulting fees for strategy planning.",
+"Build long-term contracts with clients.",
+"Expand into full digital marketing agency."
+],
+
+marketing:"Use LinkedIn networking, webinars and workshops to get clients."
+
+},
+
+"YouTube Channel":{
+
+investment:"Smartphone + Internet",
+profit:"₹50,000+ per month",
+
+steps:[
+"Choose a niche like education, cooking or DIY.",
+"Create a YouTube channel and branding.",
+"Plan weekly video topics.",
+"Record videos with clear audio and lighting.",
+"Edit videos using free tools like CapCut.",
+"Upload consistently with SEO titles and tags.",
+"Promote videos on social media.",
+"Reach 1000 subscribers and 4000 watch hours.",
+"Enable monetization through ads.",
+"Earn from sponsorships and affiliate marketing."
+],
+
+marketing:"Promote videos through Instagram reels, WhatsApp sharing and collaborations."
+
+},
+
+"Affiliate Marketing":{
+
+investment:"No product required",
+profit:"₹20,000+ per month",
+
+steps:[
+"Join affiliate programs like Amazon Associates.",
+"Choose product categories like fashion or gadgets.",
+"Create a blog, YouTube or Instagram page.",
+"Review and recommend products.",
+"Share affiliate links in content.",
+"Drive traffic using SEO and social media.",
+"Track clicks and conversions.",
+"Promote trending products.",
+"Increase followers and website visitors.",
+"Scale by promoting multiple brands."
+],
+
+marketing:"Use blogs, YouTube reviews and Instagram pages to promote affiliate products."
+
+},
+
+"Blogging":{
+
+investment:"Domain + Hosting",
+profit:"₹30,000+ per month",
+
+steps:[
+"Choose blog niche like food, parenting or fashion.",
+"Buy domain and hosting.",
+"Install WordPress blog.",
+"Write SEO optimized articles.",
+"Share blog posts on social media.",
+"Grow website traffic using SEO.",
+"Apply for Google AdSense.",
+"Earn through ads and affiliate links.",
+"Collaborate with brands for sponsored posts.",
+"Scale blog into digital media brand."
+],
+
+marketing:"Use Pinterest, SEO keywords and social media to grow blog traffic."
+
+},
+
+"Online Course Creator":{
+
+investment:"Skill + Recording device",
+profit:"₹50,000+ per month",
+
+steps:[
+"Choose skill like tailoring, cooking or spoken English.",
+"Create structured course modules.",
+"Record lessons using smartphone or webcam.",
+"Edit videos for clarity.",
+"Upload course on platforms like Udemy.",
+"Sell courses through Instagram or website.",
+"Offer certificates after completion.",
+"Collect student feedback.",
+"Improve course quality.",
+"Launch advanced courses."
+],
+
+marketing:"Promote courses through YouTube tutorials, Instagram reels and webinars."
+
+},
+
+"Email Marketing Services":{
+
+investment:"Email marketing tool knowledge",
+profit:"₹30,000+ per month",
+
+steps:[
+"Learn email marketing platforms like Mailchimp.",
+"Understand email copywriting techniques.",
+"Create sample email campaign templates.",
+"Approach businesses needing newsletters.",
+"Design promotional email sequences.",
+"Automate welcome and follow-up emails.",
+"Track open rates and click rates.",
+"Optimize campaigns based on data.",
+"Provide monthly email marketing service.",
+"Expand to automation consulting."
+],
+
+marketing:"Promote services through LinkedIn and freelancer platforms."
+
+},
+
+"SEO Specialist":{
+
+investment:"SEO skills",
+profit:"₹40,000+ per month",
+
+steps:[
+"Learn SEO fundamentals like keywords and backlinks.",
+"Use tools like Google Keyword Planner.",
+"Practice optimizing websites.",
+"Create SEO portfolio projects.",
+"Offer SEO services to local businesses.",
+"Optimize website content and meta tags.",
+"Build backlinks to improve ranking.",
+"Monitor website traffic using Google Analytics.",
+"Provide monthly SEO reports.",
+"Scale to full SEO agency."
+],
+
+marketing:"Promote services via LinkedIn, Upwork and digital marketing communities."
+
+},
+
+};
+
+
+// show data
+const data = businessData[idea];
+
+if(data){
+
+document.getElementById("investment").innerText = data.investment;
+document.getElementById("profit").innerText = data.profit;
+
+const stepsContainer = document.getElementById("roadmapSteps");
+
+data.steps.forEach((step,i)=>{
+
+const card = document.createElement("div");
+card.className="step";
+
+card.innerHTML=`
+<h3>Step ${i+1}</h3>
+<p>${step}</p>
+`;
+
+stepsContainer.appendChild(card);
+
+});
+
+document.getElementById("marketing").innerHTML=
+"<b>Marketing Strategy:</b> "+data.marketing;
+
+}
+
+</script>
+
+</body>
+</html>
